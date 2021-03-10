@@ -1,8 +1,5 @@
-extends KinematicBody2D
+extends "res://characters/enemies/Enemy.gd"
 
-const ACCELERATION = 7
-const MAX_SPEED = 260
-const MAX_HEALTH = 15.0
 const FIRE_RATE = 4
 const FIRE_RANGE = 300
 # https://gamedevelopment.tutsplus.com/tutorials/understanding-steering-behaviors-collision-avoidance--gamedev-7777
@@ -12,37 +9,18 @@ const SEP_FORCE = 5
 
 enum {STATE_IDLE, STATE_CHASING, STATE_ATTACKING}
 
-signal hp_changed(x)
-
 var Bullet = preload("res://characters/enemies/projectiles/Heli_Bullet.tscn")
 
 var velocity = Vector2()
-var target
 var current_state = STATE_IDLE
 var reloading = 0
 
-func _ready():
-	set_meta("type", "enemy")
-	var _err1 = $Detection.connect("body_entered", self, "enemy_detected")
-	var _err2 = $HealthBar.connect("dead", self, "die")
-	$HealthBar.set_max_health(MAX_HEALTH)
-	var _err3 = $Detonation.connect("animation_finished", self, "queue_free")
-	
-func enemy_detected(body):
-	if body.has_meta("type") and body.get_meta("type") == "player":
-		target = body
-	
-func on_collision(body):
-	if body.has_meta("type") and body.get_meta("type") == "projectile":
-		emit_signal("hp_changed", -body.damage)
-		
-func die():
-	$CollisionShape2D.set_deferred("disabled", true)
-	$Detonation.visible = true
-	$Detonation.playing = true
-	$head.visible = false
-	$HealthBar.visible = false
-	set_physics_process(false)
+
+func _init():
+	ACCELERATION = 7
+	MAX_HEALTH = 15.0
+	MAX_SPEED = 260
+
 	
 func _physics_process(_delta):
 	reloading -= 0.1
@@ -100,7 +78,12 @@ func _physics_process(_delta):
 				#var curr_dist = global_position.distance_to(target.global_position)
 				var next_dist = target_location.distance_to(target.global_position)
 				if next_dist >= FIRE_RANGE:
-					target_speed = Vector2(0,0)
+					# target_speed = Vector2(0,0) # this causes a complete stop
+					target_speed.x *= 0.8
+					target_speed.y *= 0.8
+					if target_speed.length <= 0.2:
+						target_speed = Vector2(0, 0)
+					# this should cause a gradual slowdown
 					
 			# separation
 			var neighbor_count = 0

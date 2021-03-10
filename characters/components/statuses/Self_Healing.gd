@@ -1,7 +1,7 @@
 extends Node
 
-var HEAL_AMOUNT = 1.0
-var HEAL_RATE = 5.0
+export var HEAL_AMOUNT = 1.0
+export var HEAL_RATE = 5.0
 var cooldown = 0
 
 signal trigger()
@@ -10,6 +10,7 @@ func init(amt, rate = 5.0):
 	HEAL_AMOUNT = amt
 	HEAL_RATE = rate
 
+# MUST be a sibling of HealthBar
 func _ready():
 	var _err = connect("trigger", self, "heal", [HEAL_AMOUNT])
 	
