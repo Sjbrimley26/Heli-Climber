@@ -15,7 +15,7 @@ var fireRates = [
 	0.8,
 	8,
 	8,
-	6,
+	4.5,
 	3
 ]
 var prevEquipped

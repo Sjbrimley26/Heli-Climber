@@ -5,7 +5,7 @@ var prev_position
 signal trigger_aoe()
 
 func _init():
-	speed = 600
+	speed = 800
 	set_damage(7)
 	affected_by_gravity = true
 

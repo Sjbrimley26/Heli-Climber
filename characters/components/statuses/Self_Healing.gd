@@ -2,7 +2,7 @@ extends Node
 
 export var HEAL_AMOUNT = 1.0
 export var HEAL_RATE = 5.0
-var cooldown = 0
+var cooldown = 5
 
 signal trigger()
 

@@ -3,9 +3,9 @@ extends "res://characters/enemies/Enemy.gd"
 const FIRE_RATE = 4
 const FIRE_RANGE = 300
 # https://gamedevelopment.tutsplus.com/tutorials/understanding-steering-behaviors-collision-avoidance--gamedev-7777
-const SIGHT_RANGE = 30
-const MAX_AVOID_FORCE = 8
-const SEP_FORCE = 5
+const SIGHT_RANGE = 100
+const MAX_AVOID_FORCE = 6
+const SEP_FORCE = 6
 
 enum {STATE_IDLE, STATE_CHASING, STATE_ATTACKING}
 
@@ -20,7 +20,7 @@ func _init():
 	ACCELERATION = 7
 	MAX_HEALTH = 15.0
 	MAX_SPEED = 260
-
+	
 	
 func _physics_process(_delta):
 	reloading -= 0.1
@@ -75,14 +75,14 @@ func _physics_process(_delta):
 			# stop when in range
 			if target_distance <= FIRE_RANGE and hasLOS:
 				var target_location = global_position + target_speed
-				#var curr_dist = global_position.distance_to(target.global_position)
+				
 				var next_dist = target_location.distance_to(target.global_position)
 				if next_dist >= FIRE_RANGE:
-					# target_speed = Vector2(0,0) # this causes a complete stop
-					target_speed.x *= 0.8
-					target_speed.y *= 0.8
-					if target_speed.length <= 0.2:
-						target_speed = Vector2(0, 0)
+					target_speed = Vector2(0,0) # this causes a complete stop
+					#target_speed.x *= 0.8
+					#target_speed.y *= 0.8
+					#if target_speed.length() <= 0.02:
+						#target_speed = Vector2(0, 0)
 					# this should cause a gradual slowdown
 					
 			# separation
