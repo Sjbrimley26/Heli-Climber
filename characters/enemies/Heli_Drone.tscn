@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://img/enemies/heli_drone/heli_head_3.png" type="Texture" id=1]
 [ext_resource path="res://img/enemies/heli_drone/heli_right_arm.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://characters/components/HealthBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://img/enemies/heli_drone/heli_explosion.png" type="Texture" id=7]
 [ext_resource path="res://characters/enemies/Heli_Drone.gd" type="Script" id=8]
-[ext_resource path="res://characters/components/statuses/Self_Healing.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.5089, 10 )
@@ -86,7 +85,7 @@ shape = SubResource( 1 )
 
 [node name="head" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="arm_l" type="Sprite" parent="head"]
@@ -119,8 +118,6 @@ scale = Vector2( 0.52, 0.44 )
 [node name="Detonation" type="AnimatedSprite" parent="."]
 visible = false
 frames = SubResource( 12 )
-
-[node name="SelfHealing" parent="." instance=ExtResource( 9 )]
 
 [node name="NeighborArea" type="Area2D" parent="."]
 visible = false

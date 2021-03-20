@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://img/tiles/Neon Tiles.png" type="Texture" id=1]
 [ext_resource path="res://img/tiles/wall_1.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://img/tiles/wall_2.png" type="Texture" id=5]
 [ext_resource path="res://img/tiles/wall_3.png" type="Texture" id=6]
 [ext_resource path="res://img/tiles/wall_4.png" type="Texture" id=7]
+[ext_resource path="res://characters/enemies/Runner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://props/Barrel.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/enemies/Heli_Drone.tscn" type="PackedScene" id=10]
 
 [sub_resource type="GDScript" id=1]
@@ -455,12 +457,6 @@ tile_data = PoolIntArray( -786436, 0, 0, -786435, 0, 0, -786434, 0, 0, -786433, 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 4.71098, -85.2149 )
 
-[node name="Heli_Drone3" parent="." instance=ExtResource( 10 )]
-position = Vector2( 145.003, 17.2345 )
-
-[node name="Heli_Drone4" parent="." instance=ExtResource( 10 )]
-position = Vector2( 247.786, -109.575 )
-
 [node name="Heli_Drone5" parent="." instance=ExtResource( 10 )]
 position = Vector2( 338.555, -229.711 )
 
@@ -471,13 +467,25 @@ position = Vector2( 411.971, -309.801 )
 position = Vector2( 472.039, -229.711 )
 
 [node name="Heli_Drone8" parent="." instance=ExtResource( 10 )]
-position = Vector2( 573.487, -101.566 )
+position = Vector2( 560.713, -123.077 )
 
 [node name="Heli_Drone9" parent="." instance=ExtResource( 10 )]
-position = Vector2( 665.591, 15.8996 )
+position = Vector2( 615.714, 0.393753 )
 
 [node name="Heli_Drone10" parent="." instance=ExtResource( 10 )]
-position = Vector2( 494.731, 14.5648 )
+position = Vector2( 668.47, -86.0358 )
 
 [node name="Heli_Drone11" parent="." instance=ExtResource( 10 )]
-position = Vector2( 331.881, 18.5693 )
+position = Vector2( 631.429, -230.833 )
+
+[node name="Runner" parent="." instance=ExtResource( 8 )]
+position = Vector2( 484.547, 38.7104 )
+
+[node name="Runner2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 814.252, 37.3755 )
+
+[node name="Barrel" parent="." instance=ExtResource( 9 )]
+position = Vector2( 271.283, 48.8407 )
+
+[node name="Barrel2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 367.449, 210.061 )
