@@ -19,8 +19,10 @@ var fireRates = [
 	3
 ]
 var prevEquipped
-var equipped = SWORD
+var equipped = LAUNCHER
 var reloading = 0
+var camera_shaking = false
+var recent_damage = 1
 
 var pistol = preload("res://guns/Pistol.tscn")
 var rifle = preload("res://guns/Rifle.tscn")
@@ -28,6 +30,20 @@ var launcher = preload("res://guns/Launcher.tscn")
 var bolt_launcher = preload("res://guns/BoltLauncher.tscn")
 var bat = preload("res://guns/Bat.tscn")
 var sword = preload("res://guns/Sword.tscn")
+
+func on_collision(area):
+	recent_damage = area.damage / 10.0
+	camera_shaking = true
+	var timer = Timer.new()
+	timer.set_wait_time(1)
+	var _err = timer.connect("timeout", self, "stop_camera_shake", [timer])
+	add_child(timer)
+	timer.start()
+	
+func stop_camera_shake(timer):
+	timer.queue_free()
+	camera_shaking = false
+	$Camera2D.set_offset(Vector2.ZERO)
 
 func _ready():
 	set_meta("type", "player")
@@ -106,5 +122,13 @@ func _physics_process(_delta):
 		var dir = globalMouse - global_position
 		emit_signal("fire", dir)
 		reloading = fireRates[equipped]
+		
+	# Camera Shake if recently damaged
+	var shake_amount = 1.0 * recent_damage
+	if camera_shaking:
+		$Camera2D.set_offset(Vector2( \
+		rand_range(-1.0, 1.0) * shake_amount, \
+		rand_range(-1.0, 1.0) * shake_amount \
+	))
 		
 

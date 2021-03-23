@@ -149,7 +149,7 @@ script = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.25, 0 )
 frames = SubResource( 15 )
-frame = 3
+frame = 4
 playing = true
 offset = Vector2( 0.25, -22 )
 
@@ -158,7 +158,7 @@ position = Vector2( -0.25, -4.5 )
 rotation = 0.0721643
 z_index = -1
 frames = SubResource( 24 )
-frame = 3
+frame = 2
 playing = true
 offset = Vector2( -5.01405, -31.2197 )
 
@@ -167,3 +167,4 @@ shape = SubResource( 25 )
 
 [node name="AOE" parent="." instance=ExtResource( 5 )]
 scale = Vector2( 5.29059, 5.29059 )
+knockback = 400

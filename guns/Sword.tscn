@@ -62,3 +62,5 @@ anims/fire = SubResource( 6 )
 [node name="AOE" parent="." instance=ExtResource( 3 )]
 position = Vector2( 13.1102, -2.99661 )
 scale = Vector2( 3.86095, 3.86095 )
+collision_mask = 13
+knockback = 100
