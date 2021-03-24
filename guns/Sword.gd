@@ -13,7 +13,7 @@ func _deflect_bullet(area, dir):
 	if area.has_meta("type") and area.get_meta("type") == "projectile":
 		area.vel = area.vel.reflect(dir.tangent().normalized())
 		area.rotation = dir.angle()
-		area.set_collision_mask_bit(2, true) # not working
+		area.set_collision_mask_bit(2, true) # now its working
 
 func fire(dir):
 	_start_block(dir)

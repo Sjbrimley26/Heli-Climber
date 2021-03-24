@@ -9,17 +9,18 @@ const SPEED = 250
 const GRAVITY = 30
 const JUMP = -900
 
-enum {PISTOL, RIFLE, LAUNCHER, BOLT_LAUNCHER, BAT, SWORD}
+enum {PISTOL, RIFLE, LAUNCHER, BOLT_LAUNCHER, BAT, SWORD, SAW}
 var fireRates = [
 	3,
 	0.8,
 	8,
 	8,
 	4.5,
-	3
+	3,
+	0.5
 ]
 var prevEquipped
-var equipped = LAUNCHER
+var equipped = SAW
 var reloading = 0
 var camera_shaking = false
 var recent_damage = 1
@@ -30,6 +31,7 @@ var launcher = preload("res://guns/Launcher.tscn")
 var bolt_launcher = preload("res://guns/BoltLauncher.tscn")
 var bat = preload("res://guns/Bat.tscn")
 var sword = preload("res://guns/Sword.tscn")
+var saw = preload("res://guns/SawLauncher.tscn")
 
 func on_collision(area):
 	recent_damage = area.damage / 10.0
@@ -72,14 +74,14 @@ func _physics_process(_delta):
 	
 	# Swap Weapons
 	if Input.is_action_just_pressed("weapon_next"):
-		if equipped == SWORD:
+		if equipped == SAW:
 			equipped = PISTOL
 		else:
 			equipped = equipped + 1
 	
 	if Input.is_action_just_pressed("weapon_prev"):
 		if equipped == PISTOL:
-			equipped = SWORD
+			equipped = SAW
 		else:
 			equipped = equipped - 1
 	
@@ -98,6 +100,8 @@ func _physics_process(_delta):
 			gun = bat
 		SWORD:
 			gun = sword
+		SAW:
+			gun = saw
 			
 	if not equipped == prevEquipped:
 		var newlyEquipped = gun.instance()

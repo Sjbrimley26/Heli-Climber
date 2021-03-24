@@ -38,4 +38,5 @@ func fade_out():
 	
 func _ready():
 	var _err = $AnimatedSprite.connect("animation_finished", self, "on_animation_end")
+	set_meta("type", "prop")
 	
