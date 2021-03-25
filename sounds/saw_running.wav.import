@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/saw_running.wav-d82fccb38361c913a0ce7c1c7cb981dd.sample"
+
+[deps]
+
+source_file="res://sounds/saw_running.wav"
+dest_files=[ "res://.import/saw_running.wav-d82fccb38361c913a0ce7c1c7cb981dd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

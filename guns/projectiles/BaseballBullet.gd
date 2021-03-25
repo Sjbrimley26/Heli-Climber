@@ -1,5 +1,7 @@
 extends "res://guns/projectiles/Bullet.gd"
 
+var sound = preload("res://sounds/explosion_2.wav")
+
 var prev_position
 
 signal trigger_aoe()
@@ -29,4 +31,8 @@ func on_collide():
 	emit_signal("trigger_aoe")
 	var _err = $AnimatedSprite.connect("animation_finished", self, "queue_free")
 	$AnimatedSprite.translate(Vector2(0, 22)) # the explosion animation is centered whereas the baseball itself is at the bottom
-	
+	var splayer = AudioStreamPlayer.new()
+	splayer.stream = sound
+	var _err2 = splayer.connect("finished", splayer, "queue_free")
+	add_child(splayer)
+	splayer.play()

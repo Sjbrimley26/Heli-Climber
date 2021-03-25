@@ -77,7 +77,6 @@ animation = "fire"
 position = Vector2( 22.3586, 11.0124 )
 
 [node name="Saw" parent="Muzzle" instance=ExtResource( 2 )]
-position = Vector2( 0, 0 )
 rotation = 4.46638e-06
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

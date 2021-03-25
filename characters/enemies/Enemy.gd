@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Enemy
+
 export(float) var MAX_HEALTH
 export(int) var MAX_SPEED
 export(int) var ACCELERATION

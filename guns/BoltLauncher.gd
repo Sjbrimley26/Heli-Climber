@@ -2,6 +2,7 @@ extends "res://guns/Gun.gd"
 
 var explosion = preload("res://guns/projectiles/BoltImpact.tscn")
 var bullet = preload("res://guns/projectiles/Bullet.gd")
+var sound = preload("res://sounds/bolt.wav")
 
 func fire(dir):
 	$AnimationPlayer.play("fire", -1, 1.8)
@@ -24,5 +25,9 @@ func shoot_bullet(dir):
 	kaboom.global_transform.origin = rc.get_collision_point()
 	var angle = dir.angle()
 	kaboom.rotate(angle - PI/2)
-	
 	sprite.playing = true
+	var splayer = AudioStreamPlayer.new()
+	splayer.stream = sound
+	var _err = splayer.connect("finished", splayer, "queue_free")
+	add_child(splayer)
+	splayer.play()

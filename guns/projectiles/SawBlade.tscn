@@ -24,7 +24,7 @@ tracks/0/keys = {
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 rotation = 6.97822
-collision_layer = 2
+collision_layer = 0
 collision_mask = 5
 script = ExtResource( 2 )
 

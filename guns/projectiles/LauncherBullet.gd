@@ -1,5 +1,7 @@
 extends "res://guns/projectiles/Bullet.gd"
 
+var explosion_sound = preload("res://sounds/explosion_1.wav")
+
 signal trigger_aoe()
 
 func _init():
@@ -7,6 +9,11 @@ func _init():
 	set_damage(10)
 
 func on_collide():
+	var splayer = AudioStreamPlayer.new()
+	splayer.stream = explosion_sound
+	var _err2 = splayer.connect("finished", splayer, "queue_free")
+	add_child(splayer)
+	splayer.play()
 	vel = Vector2()
 	$CollisionShape2D.set_disabled(true)
 	$AnimatedSprite.play("explode")

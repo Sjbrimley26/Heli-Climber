@@ -1,13 +1,13 @@
 extends KinematicBody2D
 
+var sound = preload("res://sounds/saw_flying.wav")
+var bounce = preload("res://sounds/saw_bounce.wav")
 
 var vel = Vector2()
 var speed = 1000
 var damage = 5
 var recently_hit_enemies = []
-
-func on_collide():
-	queue_free()
+var bounced_recently = false
 
 func start_at(dir, pos):
 	set_rotation(dir)
@@ -20,6 +20,22 @@ func _rebound(normal):
 			remove_collision_exception_with(e)
 	recently_hit_enemies = []
 	vel = vel.reflect(normal.tangent())
+	if not bounced_recently:
+		var splayer = AudioStreamPlayer.new()
+		splayer.stream = bounce
+		var _err2 = splayer.connect("finished", splayer, "queue_free")
+		add_child(splayer)
+		splayer.play()
+		bounced_recently = true
+		var timer = Timer.new()
+		timer.set_wait_time(0.2)
+		var _err3 = timer.connect("timeout", self, "_end_rebound", [timer])
+		add_child(timer)
+		timer.start()
+	
+func _end_rebound(timer):
+	timer.queue_free()
+	bounced_recently = false
 	
 func _init():
 	set_meta('type', 'projectile')
@@ -30,6 +46,11 @@ func _ready():
 	var _err = lifespan.connect("timeout", self, "queue_free")
 	add_child(lifespan)
 	lifespan.start()
+	var splayer = AudioStreamPlayer.new()
+	splayer.stream = sound
+	var _err2 = splayer.connect("finished", splayer, "play", [0.0])
+	add_child(splayer)
+	splayer.play()
 	
 func _physics_process(delta):
 	var collision = move_and_collide(vel * delta)

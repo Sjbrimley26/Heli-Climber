@@ -39,7 +39,8 @@ func trigger_bite_damage(timer):
 	var chomp = Bullet.new()
 	chomp.set_damage(BITE_DAMAGE)
 	for enemy in $Bite.get_overlapping_bodies():
-		enemy.on_collision(chomp)
+		if enemy.has_method("on_collision"):
+			enemy.on_collision(chomp)
 	chomp.queue_free()
 	timer.queue_free()
 
@@ -73,15 +74,15 @@ func _physics_process(_delta):
 			var curr_speed = velocity.x
 			var target_speed = curr_speed
 	
-			if target.position.x < self.position.x:
+			if target.global_position.x < self.global_position.x:
 				if curr_speed > -MAX_SPEED:
 					target_speed -= ACCELERATION
-			if target.position.x > self.position.x:
+			if target.global_position.x > self.global_position.x:
 				if curr_speed < MAX_SPEED:
 					target_speed += ACCELERATION
 			
-			var x_dist = abs(self.position.x - target.position.x)
-			var target_has_high_ground = target.position.y < self.position.y - 50
+			var x_dist = abs(self.global_position.x - target.global_position.x)
+			var target_has_high_ground = target.global_position.y < self.global_position.y - 50
 					
 			# works okay, just starts leapiing towards the target when close
 			if is_between(x_dist, 50, 200) and (target_has_high_ground) and is_on_floor():
@@ -95,7 +96,7 @@ func _physics_process(_delta):
 			velocity = move_and_slide(velocity, Vector2.UP)
 			
 			# walking animation
-			if target.position.x < self.position.x:
+			if target.global_position.x < self.global_position.x:
 				$AnimationPlayer.play("walk", -1, 1.5)
 			else:
 				$AnimationPlayer.play("walk-right", -1, 1.5)

@@ -10,6 +10,7 @@ const SEP_FORCE = 6
 enum {STATE_IDLE, STATE_CHASING, STATE_ATTACKING}
 
 var Bullet = preload("res://characters/enemies/projectiles/Heli_Bullet.tscn")
+var sound = preload("res://sounds/heli_drone_blast.wav")
 
 var velocity = Vector2()
 var current_state = STATE_IDLE
@@ -113,8 +114,8 @@ func _physics_process(_delta):
 			# dual blasters
 			var bullet_l = Bullet.instance()
 			var bullet_r = Bullet.instance()
-			get_parent().get_parent().add_child(bullet_l)
-			get_parent().get_parent().add_child(bullet_r)
+			get_parent().add_child(bullet_l)
+			get_parent().add_child(bullet_r)
 			var dir = target.global_position - self.global_position
 			var angle = dir.angle()
 			bullet_l.start_at(angle, $head/arm_l/end.get_global_position())
@@ -122,3 +123,8 @@ func _physics_process(_delta):
 			# reload
 			reloading = FIRE_RATE
 			current_state = STATE_CHASING
+			var splayer = AudioStreamPlayer.new()
+			splayer.stream = sound
+			var _err = splayer.connect("finished", splayer, "queue_free")
+			add_child(splayer)
+			splayer.play()

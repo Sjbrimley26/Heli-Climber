@@ -20,7 +20,7 @@ var fireRates = [
 	0.5
 ]
 var prevEquipped
-var equipped = SAW
+var equipped = RIFLE
 var reloading = 0
 var camera_shaking = false
 var recent_damage = 1
@@ -33,6 +33,8 @@ var bat = preload("res://guns/Bat.tscn")
 var sword = preload("res://guns/Sword.tscn")
 var saw = preload("res://guns/SawLauncher.tscn")
 
+var hit_sound = preload("res://sounds/damage.wav")
+
 func on_collision(area):
 	recent_damage = area.damage / 10.0
 	camera_shaking = true
@@ -41,6 +43,11 @@ func on_collision(area):
 	var _err = timer.connect("timeout", self, "stop_camera_shake", [timer])
 	add_child(timer)
 	timer.start()
+	var splayer = AudioStreamPlayer.new()
+	splayer.stream = hit_sound
+	var _err2 = splayer.connect("finished", splayer, "queue_free")
+	add_child(splayer)
+	splayer.play()
 	
 func stop_camera_shake(timer):
 	timer.queue_free()
