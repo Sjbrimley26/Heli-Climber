@@ -84,5 +84,5 @@ weapon_prev={
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color( 0.592157, 0.568627, 0.627451, 1 )
+environment/default_clear_color=Color( 0.168627, 0.0588235, 0.329412, 1 )
 environment/default_environment="res://default_env.tres"

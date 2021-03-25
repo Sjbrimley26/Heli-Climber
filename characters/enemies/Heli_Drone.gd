@@ -50,17 +50,17 @@ func _physics_process(_delta):
 	
 			# chase logic
 			if target_distance > FIRE_RANGE or not hasLOS:
-				if target.position.x < self.position.x:
+				if target.global_position.x < self.global_position.x:
 					if curr_x_speed > -MAX_SPEED:
 						target_x_speed -= ACCELERATION
-				if target.position.x > self.position.x:
+				if target.global_position.x > self.global_position.x:
 					if curr_x_speed < MAX_SPEED:
 						target_x_speed += ACCELERATION
 
-				if target.position.y - 20 < self.position.y:
+				if target.global_position.y - 20 < self.global_position.y:
 					if curr_y_speed > -MAX_SPEED:
 						target_y_speed -= ACCELERATION
-				if target.position.y - 20 > self.position.y:
+				if target.global_position.y - 20 > self.global_position.y:
 					if curr_y_speed < MAX_SPEED:
 						target_y_speed += ACCELERATION
 			

@@ -8,8 +8,8 @@ const LEVELS = [
 
 var rng = RandomNumberGenerator.new()
 
-var prev_level = null
-var current_level = null
+var prev_level: Level
+var current_level: Level
 var current_height = 0
 var height_reached = 0 # updated when a new room is entered, need a way to factor in the "final height" when the player dies
 var floor_reached = 0
@@ -46,6 +46,7 @@ func _change_current_level(level: Level):
 		var _err2 = prev_level.connect("trigger_current_level", self, "_kill_player", [], CONNECT_ONESHOT)
 		prev_level.disconnect("enemy_change_level", self, "_enemy_change_level")
 		var _err4 = prev_level.connect("enemy_change_level", self, "_kill_enemy")
+		prev_level.enemies_sent = []
 		# if they fall further than that, they should die (there will be nothing below)
 	current_level = level
 	var _err = current_level.connect("trigger_next_level", self, "_spawn_new_level", [], CONNECT_ONESHOT)
