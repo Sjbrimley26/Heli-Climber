@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 signal trigger_aoe()
-const MAX_HITS = 3
+const MAX_HITS = 2
 var hit_count = 0
 var explosion_played = false
 

@@ -7,12 +7,13 @@ export(int) var MAX_SPEED
 export(int) var ACCELERATION
 
 var target
+var rng = RandomNumberGenerator.new()
 
 signal hp_changed(x)
 
-
 # required Nodes: HealthBar, Detection, Detonation
 func _ready():
+	rng.randomize()
 	set_meta("type", "enemy")
 	var hp_err = $HealthBar.connect("dead", self, "die")
 	if hp_err != OK:
@@ -42,6 +43,10 @@ func die():
 	if has_node("head"):
 		$head.visible = false
 	set_physics_process(false)
+	if rng.randf_range(0, 10) <= 2.5:
+		var hpack = load("res://props/HealthPack.tscn").instance()
+		get_parent().add_child(hpack)
+		hpack.global_position = self.global_position
 	
 
 func enemy_detected(body):

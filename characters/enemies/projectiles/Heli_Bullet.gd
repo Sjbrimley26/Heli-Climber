@@ -3,7 +3,7 @@ extends "res://characters/enemies/projectiles/Area2DBullet.gd"
 var collided = false
 
 func _init():
-	set_damage(5)
+	set_damage(4)
 
 func on_collide(body):
 	if collided:

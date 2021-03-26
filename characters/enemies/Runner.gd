@@ -4,7 +4,7 @@ var Bullet = preload("res://guns/projectiles/Bullet.gd")
 
 const GRAVITY = 30
 const JUMP = -900
-const BITE_DAMAGE = 15
+const BITE_DAMAGE = 10
 
 enum {STATE_IDLE, STATE_CHASING, STATE_ATTACKING}
 
