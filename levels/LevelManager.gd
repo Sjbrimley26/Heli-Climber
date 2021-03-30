@@ -30,6 +30,7 @@ func _spawn_new_level(height):
 	
 func _change_current_level(level: Level):
 	floor_reached += 1
+	Global.floor_reached = floor_reached
 	if prev_level:
 		prev_level.queue_free()
 		# so delete any level that is 2 "chunks" below the chatacter
@@ -43,7 +44,7 @@ func _change_current_level(level: Level):
 			current_height = 0
 	if current_level:
 		prev_level = current_level
-		var _err2 = prev_level.connect("trigger_current_level", self, "_kill_player", [], CONNECT_ONESHOT)
+		var _err2 = prev_level.get_node("CurrentLevelTrigger").connect("body_entered", self, "_kill_player", [], CONNECT_ONESHOT)
 		prev_level.disconnect("enemy_change_level", self, "_enemy_change_level")
 		var _err4 = prev_level.connect("enemy_change_level", self, "_kill_enemy")
 		prev_level.enemies_sent = []
@@ -54,7 +55,8 @@ func _change_current_level(level: Level):
 	var _err3 = current_level.connect("enemy_change_level", self, "_enemy_change_level")
 
 func _kill_player(_player):
-	pass
+	print("end scene")
+	var _err = get_tree().change_scene("res://menus/DeathMenu.tscn")
 	
 func _kill_enemy(enemy: Enemy):
 	enemy.queue_free()

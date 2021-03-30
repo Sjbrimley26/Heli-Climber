@@ -31,7 +31,7 @@ func on_collide():
 	emit_signal("trigger_aoe")
 	var _err = $AnimatedSprite.connect("animation_finished", self, "queue_free")
 	$AnimatedSprite.translate(Vector2(0, 22)) # the explosion animation is centered whereas the baseball itself is at the bottom
-	var splayer = AudioStreamPlayer.new()
+	var splayer = AudioStreamPlayer2D.new()
 	splayer.stream = sound
 	var _err2 = splayer.connect("finished", splayer, "queue_free")
 	add_child(splayer)

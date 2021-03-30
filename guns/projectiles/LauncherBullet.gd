@@ -9,7 +9,7 @@ func _init():
 	set_damage(10)
 
 func on_collide():
-	var splayer = AudioStreamPlayer.new()
+	var splayer = AudioStreamPlayer2D.new()
 	splayer.stream = explosion_sound
 	var _err2 = splayer.connect("finished", splayer, "queue_free")
 	add_child(splayer)

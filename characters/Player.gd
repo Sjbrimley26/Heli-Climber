@@ -66,7 +66,7 @@ func on_collision(area):
 	health -= area.damage
 	emit_signal("hp_changed", health)
 	if health <= 0:
-		get_tree().change_scene_to(death_menu)
+		var _err3 = get_tree().change_scene_to(death_menu)
 	
 func stop_camera_shake(timer):
 	recent_damage = 1

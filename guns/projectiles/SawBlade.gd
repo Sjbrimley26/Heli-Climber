@@ -21,7 +21,7 @@ func _rebound(normal):
 	recently_hit_enemies = []
 	vel = vel.reflect(normal.tangent())
 	if not bounced_recently:
-		var splayer = AudioStreamPlayer.new()
+		var splayer = AudioStreamPlayer2D.new()
 		splayer.stream = bounce
 		var _err2 = splayer.connect("finished", splayer, "queue_free")
 		add_child(splayer)
@@ -46,7 +46,7 @@ func _ready():
 	var _err = lifespan.connect("timeout", self, "queue_free")
 	add_child(lifespan)
 	lifespan.start()
-	var splayer = AudioStreamPlayer.new()
+	var splayer = AudioStreamPlayer2D.new()
 	splayer.stream = sound
 	var _err2 = splayer.connect("finished", splayer, "play", [0.0])
 	add_child(splayer)

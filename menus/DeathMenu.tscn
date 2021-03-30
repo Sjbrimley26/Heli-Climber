@@ -19,12 +19,13 @@ expand_margin_right = 10.0
 expand_margin_bottom = 5.0
 
 [node name="MarginContainer" type="MarginContainer"]
-anchor_right = 1.0
+anchor_left = 0.00116208
+anchor_right = 1.00116
 anchor_bottom = 1.0
 custom_constants/margin_right = 80
-custom_constants/margin_top = 120
+custom_constants/margin_top = 80
 custom_constants/margin_left = 80
-custom_constants/margin_bottom = 120
+custom_constants/margin_bottom = 80
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,71 +33,121 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 80.0
-margin_top = 120.0
-margin_right = 1286.0
-margin_bottom = 648.0
+margin_top = 80.0
+margin_right = 1285.0
+margin_bottom = 688.0
 custom_constants/separation = 20
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 1206.0
-margin_bottom = 151.0
+margin_right = 1205.0
+margin_bottom = 144.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
 margin_left = 455.0
-margin_top = 39.0
+margin_top = 35.0
 margin_right = 750.0
-margin_bottom = 112.0
+margin_bottom = 108.0
 custom_fonts/font = ExtResource( 1 )
 text = "You Died!"
 
-[node name="CenterContainer4" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 171.0
-margin_right = 1206.0
-margin_bottom = 322.0
-size_flags_vertical = 3
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 164.0
+margin_right = 1205.0
+margin_bottom = 237.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer4"]
-margin_left = 315.0
-margin_top = 39.0
-margin_right = 890.0
-margin_bottom = 112.0
-size_flags_vertical = 3
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 243.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="VBoxContainer/CenterContainer4/HBoxContainer"]
-margin_right = 460.0
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 247.0
+margin_right = 709.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Floor Reached "
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 713.0
+margin_right = 957.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FloorLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 961.0
+margin_right = 1205.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 257.0
+margin_right = 1205.0
+margin_bottom = 330.0
+size_flags_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 234.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 238.0
+margin_right = 728.0
 margin_bottom = 73.0
 custom_fonts/font = ExtResource( 1 )
-text = "final Score         "
+text = "Bots Destroyed"
 
-[node name="ScoreLabel" type="Label" parent="VBoxContainer/CenterContainer4/HBoxContainer"]
-margin_left = 464.0
-margin_right = 575.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 732.0
+margin_right = 966.0
 margin_bottom = 73.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemyLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 970.0
+margin_right = 1205.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
-text = "100"
+text = "0"
 
 [node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 342.0
-margin_right = 1206.0
-margin_bottom = 425.0
+margin_top = 422.0
+margin_right = 1205.0
+margin_bottom = 505.0
 
 [node name="NewGameButton" type="Button" parent="VBoxContainer/CenterContainer2"]
-margin_left = 464.0
-margin_right = 742.0
+margin_left = 463.0
+margin_right = 741.0
 margin_bottom = 83.0
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "New Game"
 
 [node name="CenterContainer3" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 445.0
-margin_right = 1206.0
-margin_bottom = 528.0
+margin_top = 525.0
+margin_right = 1205.0
+margin_bottom = 608.0
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/CenterContainer3"]
-margin_left = 524.0
-margin_right = 682.0
+margin_left = 523.0
+margin_right = 681.0
 margin_bottom = 83.0
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 1 )

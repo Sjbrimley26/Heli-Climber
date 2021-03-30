@@ -43,10 +43,13 @@ func die():
 	if has_node("head"):
 		$head.visible = false
 	set_physics_process(false)
+	var type = get_meta("enemy")
+	Global.enemies_killed[type] += 1
 	if rng.randf_range(0, 10) <= 2.5:
 		var hpack = load("res://props/HealthPack.tscn").instance()
-		get_parent().add_child(hpack)
-		hpack.global_position = self.global_position
+		hpack.global_position = global_position
+		get_parent().call_deferred("add_child", hpack)
+		
 	
 
 func enemy_detected(body):

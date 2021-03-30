@@ -20,6 +20,7 @@ func _init():
 	MAX_SPEED = 320
 	ACCELERATION = 10
 	MAX_HEALTH = 30.0
+	set_meta("enemy", "runner")
 	
 var _is_biting = false
 

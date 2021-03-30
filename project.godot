@@ -33,12 +33,17 @@ _global_script_class_icons={
 [application]
 
 config/name="Heli Clone"
+run/main_scene="res://menus/MainMenu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [display]
 
-window/size/width=1366
-window/size/height=768
+window/size/width=1280
+window/size/height=720
 mouse_cursor/custom_image="res://img/cursor.png"
 mouse_cursor/custom_image_hotspot=Vector2( 32, 32 )
 

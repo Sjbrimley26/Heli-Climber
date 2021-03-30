@@ -35,8 +35,7 @@ position = Vector2( 369.999, -274.132 )
 shape = SubResource( 1 )
 
 [node name="CurrentLevelTrigger" type="Area2D" parent="."]
-visible = false
-position = Vector2( 0, 290.95 )
+position = Vector2( 0, 307.921 )
 collision_layer = 0
 collision_mask = 2
 

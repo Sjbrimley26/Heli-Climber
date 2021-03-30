@@ -21,7 +21,7 @@ func _init():
 	ACCELERATION = 7
 	MAX_HEALTH = 15.0
 	MAX_SPEED = 260
-	
+	set_meta("enemy", "drone")
 	
 func _physics_process(_delta):
 	reloading -= 0.1
@@ -123,7 +123,7 @@ func _physics_process(_delta):
 			# reload
 			reloading = FIRE_RATE
 			current_state = STATE_CHASING
-			var splayer = AudioStreamPlayer.new()
+			var splayer = AudioStreamPlayer2D.new()
 			splayer.stream = sound
 			var _err = splayer.connect("finished", splayer, "queue_free")
 			add_child(splayer)
