@@ -6,6 +6,8 @@ const LEVELS = [
 	"res://levels/Level2.tscn"
 ]
 
+var thread = Thread.new()
+var mutex = Mutex.new()
 var rng = RandomNumberGenerator.new()
 
 var prev_level: Level
@@ -18,15 +20,25 @@ func _ready():
 	rng.randomize()
 	_change_current_level($Level1)
 	
+func _spawn_thread(h):
+	thread.start(self, "_spawn_new_level", h)
+	
 func _spawn_new_level(height):
-	var next_level = load(LEVELS[rng.randi_range(0, LEVELS.size() - 1)]) # so it will just select a level randomly from the list for now
+	# so it will just select a level randomly from the list for now
 	# eventually I could implement a set of easy, medium, and hard levels that would be selected based on height_reached
 	# maybe a boss room appears after a certain height? or even a certain # of floors reached?
-	var new_level = next_level.instance()
-	new_level.position.y -= height + current_height
+	
+	var new_level = load(LEVELS[rng.randi_range(0, LEVELS.size() - 1)]).instance()
+	#new_level.position.y -= height + current_height
+	new_level.set_deferred("position", Vector2(0, new_level.position.y - (height + current_height)))
+	mutex.lock()
 	current_height += height
+	mutex.unlock()
 	var _err = new_level.connect("trigger_current_level", self, "_change_current_level", [], CONNECT_ONESHOT)
-	call_deferred("add_child", new_level)
+	#call_deferred("add_child", new_level) - this causes a bunch of errors
+	var _err2 = get_tree().create_timer(0.0).connect("timeout", self, "add_child", [new_level]) # this works though
+	# big thank you to Yogoda (on Github)
+	thread.call_deferred("wait_to_finish")
 	
 func _change_current_level(level: Level):
 	floor_reached += 1
@@ -50,12 +62,11 @@ func _change_current_level(level: Level):
 		prev_level.enemies_sent = []
 		# if they fall further than that, they should die (there will be nothing below)
 	current_level = level
-	var _err = current_level.connect("trigger_next_level", self, "_spawn_new_level", [], CONNECT_ONESHOT)
+	var _err = current_level.connect("trigger_next_level", self, "_spawn_thread", [], CONNECT_ONESHOT)
 	# as they enter a new area, it becomes the current room and the one they just left becomes the previous room
 	var _err3 = current_level.connect("enemy_change_level", self, "_enemy_change_level")
 
 func _kill_player(_player):
-	print("end scene")
 	var _err = get_tree().change_scene("res://menus/DeathMenu.tscn")
 	
 func _kill_enemy(enemy: Enemy):
