@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://img/enemies/runner/body_runner_1.png" type="Texture" id=1]
 [ext_resource path="res://img/enemies/runner/left leg_runner_1.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://img/enemies/runner/head_runner_1.png" type="Texture" id=7]
 [ext_resource path="res://characters/components/HealthBar.tscn" type="PackedScene" id=8]
 [ext_resource path="res://img/projectiles/big_explosion.png" type="Texture" id=9]
+[ext_resource path="res://img/lights/circle.png" type="Texture" id=10]
 [ext_resource path="res://img/enemies/runner/runner_bite.png" type="Texture" id=12]
 [ext_resource path="res://characters/enemies/Runner.gd" type="Script" id=13]
 
@@ -1330,3 +1331,9 @@ frames = SubResource( 17 )
 [node name="HealthBar" parent="." instance=ExtResource( 8 )]
 position = Vector2( 0.0558701, -28.6338 )
 scale = Vector2( 0.75, 0.75 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 10 )
+texture_scale = 0.15
+color = Color( 1, 0, 0, 1 )
+energy = 1.5

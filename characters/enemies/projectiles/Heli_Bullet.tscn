@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://img/enemies/heli_drone/heli_bullet.png" type="Texture" id=1]
 [ext_resource path="res://img/projectiles/pistol_impact.png" type="Texture" id=2]
 [ext_resource path="res://characters/enemies/projectiles/Heli_Bullet.gd" type="Script" id=3]
+[ext_resource path="res://img/lights/circle.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -87,10 +88,15 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 13 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 5.66965, -0.472469 )
 scale = Vector2( 1.15621, 1.15621 )
 shape = SubResource( 14 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 4 )
+texture_scale = 0.15
+color = Color( 1, 0, 0, 1 )

@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://guns/projectiles/PistolBullet.gd" type="Script" id=1]
 [ext_resource path="res://img/projectiles/pistol_bullet.png" type="Texture" id=2]
 [ext_resource path="res://img/projectiles/pistol_impact.png" type="Texture" id=3]
+[ext_resource path="res://img/lights/circle.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -110,5 +111,11 @@ polygon = PoolVector2Array( 0.5, -4.3125, -3, -0.5, 0.4375, 3.4375, 4, -0.6875 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
 animation = "New Anim"
-frame = 4
+frame = 7
 playing = true
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 4 )
+texture_scale = 0.1
+color = Color( 1, 0.913725, 0, 1 )
+energy = 0.8

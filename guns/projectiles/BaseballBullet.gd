@@ -36,3 +36,5 @@ func on_collide():
 	var _err2 = splayer.connect("finished", splayer, "queue_free")
 	add_child(splayer)
 	splayer.play()
+	$Light2D.visible = true
+	var _err3 = get_tree().create_timer(0.3).connect("timeout", $Light2D, "queue_free")

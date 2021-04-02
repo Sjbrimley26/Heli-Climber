@@ -45,10 +45,10 @@ func die():
 	set_physics_process(false)
 	var type = get_meta("enemy")
 	Global.enemies_killed[type] += 1
-	if rng.randf_range(0, 10) <= 2.5:
+	if rng.randf_range(0, 10) <= 9.5:
 		var hpack = load("res://props/HealthPack.tscn").instance()
 		hpack.global_position = global_position
-		get_parent().call_deferred("add_child", hpack)
+		get_parent().get_parent().call_deferred("add_child", hpack)
 		
 	
 

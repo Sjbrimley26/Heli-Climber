@@ -12,6 +12,8 @@ func on_collision(body):
 		hit_count += 1
 		
 func explode():
+	$Light2D.visible = true
+	var _err = get_tree().create_timer(0.4).connect("timeout", self, "_lights_out")
 	$AnimatedSprite.play("explode")
 	emit_signal("trigger_aoe")
 	$CollisionShape2D.set_scale(Vector2(1, 0.5))
@@ -35,6 +37,9 @@ func fade_out():
 	var _err = tween.connect("tween_all_completed", self, "queue_free")
 	add_child(tween)
 	tween.start()
+	
+func _lights_out():
+	$Light2D.visible = false
 	
 func _ready():
 	var _err = $AnimatedSprite.connect("animation_finished", self, "on_animation_end")

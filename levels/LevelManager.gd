@@ -19,6 +19,11 @@ var floor_reached = 0
 func _ready():
 	rng.randomize()
 	_change_current_level($Level1)
+	var timer = Timer.new()
+	timer.set_wait_time(0.25)
+	var _err = timer.connect("timeout", Global, "update_floor_color")
+	add_child(timer)
+	timer.start()
 	
 func _spawn_thread(h):
 	thread.start(self, "_spawn_new_level", h)
@@ -29,15 +34,15 @@ func _spawn_new_level(height):
 	# maybe a boss room appears after a certain height? or even a certain # of floors reached?
 	
 	var new_level = load(LEVELS[rng.randi_range(0, LEVELS.size() - 1)]).instance()
-	#new_level.position.y -= height + current_height
 	new_level.set_deferred("position", Vector2(0, new_level.position.y - (height + current_height)))
 	mutex.lock()
 	current_height += height
 	mutex.unlock()
 	var _err = new_level.connect("trigger_current_level", self, "_change_current_level", [], CONNECT_ONESHOT)
 	#call_deferred("add_child", new_level) - this causes a bunch of errors
-	var _err2 = get_tree().create_timer(0.0).connect("timeout", self, "add_child", [new_level]) # this works though
+	var _err2 = get_tree().create_timer(0.2).connect("timeout", self, "add_child", [new_level]) # this works though
 	# big thank you to Yogoda (on Github)
+	# 0.0 usually works but sometimes causes errors, 0.2 is safer
 	thread.call_deferred("wait_to_finish")
 	
 func _change_current_level(level: Level):
@@ -65,6 +70,12 @@ func _change_current_level(level: Level):
 	var _err = current_level.connect("trigger_next_level", self, "_spawn_thread", [], CONNECT_ONESHOT)
 	# as they enter a new area, it becomes the current room and the one they just left becomes the previous room
 	var _err3 = current_level.connect("enemy_change_level", self, "_enemy_change_level")
+	# the camera is restricted so it doesn't go left or right over the current level
+	var tilemap = current_level.get_node("Floors")
+	var map_limits = tilemap.get_used_rect()
+	var map_cell_size = tilemap.cell_size
+	$Player/Camera2D.limit_left = map_limits.position.x * map_cell_size.x
+	$Player/Camera2D.limit_right = map_limits.end.x * map_cell_size.x
 
 func _kill_player(_player):
 	var _err = get_tree().change_scene("res://menus/DeathMenu.tscn")
