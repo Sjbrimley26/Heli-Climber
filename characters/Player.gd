@@ -25,7 +25,7 @@ var fireRates = [
 	0.5
 ]
 var prevEquipped
-var equipped = PISTOL
+var equipped #= PISTOL
 var reloading = 0
 var camera_shaking = false
 var recent_damage = 1
@@ -78,6 +78,23 @@ func _ready():
 	set_meta("type", "player")
 	var _err = connect("hp_changed", $CanvasLayer/GUI, "adjust_health")
 
+func _enter_tree():
+	equipped = PISTOL
+
+func _next_weapon():
+	var toEquip
+	for i in range(1, fireRates.size() - 1):
+		var index: int
+		if equipped + i < fireRates.size():
+			index = equipped + i
+		else:
+			index = (equipped + i) % fireRates.size()
+			
+		if (Global.ammo[index] > 0):
+			toEquip = index
+			break
+	equipped = toEquip
+
 func _physics_process(_delta):
 	# Update Movement
 	if Input.is_action_pressed("right"):
@@ -102,16 +119,25 @@ func _physics_process(_delta):
 	
 	# Swap Weapons
 	if Input.is_action_just_pressed("weapon_next"):
-		if equipped == SAW:
-			equipped = PISTOL
-		else:
-			equipped = equipped + 1
+		_next_weapon()
 	
 	if Input.is_action_just_pressed("weapon_prev"):
-		if equipped == PISTOL:
-			equipped = SAW
-		else:
-			equipped = equipped - 1
+		var toEquip
+		for i in range(-1, -fireRates.size() + 1, -1):
+			var index: int
+			if equipped + i >= 0:
+				index = equipped + i
+			else:
+				index = (equipped + i) + (fireRates.size() - 1)
+				
+			if (Global.ammo[index] > 0):
+				toEquip = index
+				break
+		equipped = toEquip
+		
+	# Swap if out of ammo
+	if Global.ammo[equipped] <= 0:
+		_next_weapon()
 	
 	# Check Weapon
 	var gun
@@ -147,6 +173,8 @@ func _physics_process(_delta):
 		add_child(newlyEquipped)
 		$CanvasLayer/GUI.get_node("HBoxContainer/CenterContainer/GunIcon").texture = icon
 	
+	$CanvasLayer/GUI/HBoxContainer/CenterContainer2/AmmoCount.text = String(Global.ammo[equipped])
+	
 	var localMouse = get_local_mouse_position()
 	var globalMouse = get_global_mouse_position()
 	if localMouse.x < 0:
@@ -164,6 +192,10 @@ func _physics_process(_delta):
 		emit_signal("fire", dir)
 		reloading = fireRates[equipped]
 		
+	# Camera follow mouse
+	var mouse_offset = (get_viewport().get_mouse_position() - get_viewport().size / 2)
+	$Camera2D.position = lerp(Vector2(), mouse_offset.normalized() * 400, mouse_offset.length() / 800)
+		
 	# Camera Shake if recently damaged
 	var shake_amount = 1.0 * recent_damage
 	if camera_shaking:
@@ -171,5 +203,5 @@ func _physics_process(_delta):
 		rand_range(-1.0, 1.0) * shake_amount, \
 		rand_range(-1.0, 1.0) * shake_amount \
 	))
-		
+	
 

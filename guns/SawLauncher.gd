@@ -50,6 +50,7 @@ func fire(dir):
 	if sound_player != null:
 		_end_sound()
 	
+	Global.ammo[Global.SAW] -= 1
 	var bullet_instance = bullet.instance()
 	get_parent().get_parent().add_child(bullet_instance)
 	var start_location = $Muzzle.get_global_position()

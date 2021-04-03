@@ -13,3 +13,4 @@ func shoot_bullet(dir):
 	var _err = splayer.connect("finished", splayer, "queue_free")
 	add_child(splayer)
 	splayer.play()
+	Global.ammo[Global.LAUNCHER] -= 1

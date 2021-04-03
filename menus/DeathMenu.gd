@@ -10,6 +10,12 @@ func _ready():
 	$VBoxContainer/HBoxContainer/EnemyLabel.text = String(enemies_killed)
 	
 func _new_game():
+	for i in Global.ammo.keys():
+		Global.ammo[i] = 0
+	Global.ammo[Global.PISTOL] = 100
+	Global.ammo[Global.SWORD] = 1
+	for i in Global.enemies_killed.keys():
+		Global.enemies_killed[i] = 0
 	var _err = get_tree().change_scene("res://levels/LevelManager.tscn")
 
 func _quit():

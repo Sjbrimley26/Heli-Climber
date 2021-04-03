@@ -6,18 +6,16 @@
 [ext_resource path="res://img/tiles/wall_4.png" type="Texture" id=4]
 [ext_resource path="res://img/tiles/wall_3.png" type="Texture" id=5]
 [ext_resource path="res://img/tiles/wall_2_light.png" type="Texture" id=6]
-[ext_resource path="res://shaders/glow.shader" type="Shader" id=7]
-[ext_resource path="res://shaders/wall3_glow.shader" type="Shader" id=8]
+[ext_resource path="res://shaders/wall3_glow.shader" type="Shader" id=7]
+[ext_resource path="res://shaders/glow.shader" type="Shader" id=8]
 [ext_resource path="res://img/tiles/wall_3_light.png" type="Texture" id=9]
 [ext_resource path="res://img/tiles/wall_1_light.png" type="Texture" id=10]
-[ext_resource path="res://shaders/wall1_glow.shader" type="Shader" id=11]
+[ext_resource path="res://shaders/wall4_glow.shader" type="Shader" id=11]
 [ext_resource path="res://img/tiles/wall_4_light.png" type="Texture" id=12]
-[ext_resource path="res://shaders/wall4_glow.shader" type="Shader" id=13]
-
-
+[ext_resource path="res://shaders/wall1_glow.shader" type="Shader" id=13]
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 11 )
+shader = ExtResource( 13 )
 shader_param/glow1 = Color( 0.286275, 0.905882, 0.92549, 1 )
 shader_param/glow2 = Color( 1, 0.854902, 0.270588, 1 )
 shader_param/glow3 = Color( 1, 0.309804, 0.411765, 1 )
@@ -25,17 +23,17 @@ shader_param/strength = 1.7
 shader_param/emission = ExtResource( 10 )
 
 [sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 7 )
+shader = ExtResource( 8 )
 shader_param/glow = Color( 0, 1, 0.952941, 1 )
 shader_param/emission = ExtResource( 6 )
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 8 )
+shader = ExtResource( 7 )
 shader_param/glow = Color( 1, 0.537255, 0, 1 )
 shader_param/emission = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 13 )
+shader = ExtResource( 11 )
 shader_param/glow1 = Color( 1, 0.854902, 0.270588, 1 )
 shader_param/glow2 = Color( 1, 0.309804, 0.411765, 1 )
 shader_param/strength = 1.7
