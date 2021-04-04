@@ -1,6 +1,6 @@
 extends Node
 
-enum {PISTOL, RIFLE, LAUNCHER, BOLT_LAUNCHER, BAT, SWORD, SAW}
+enum {SWORD, PISTOL, RIFLE, LAUNCHER, BOLT_LAUNCHER, BAT, SAW}
 
 var floor_shader = preload("res://shaders/floor_shadermaterial.tres")
 
@@ -35,11 +35,11 @@ var enemies_killed = {
 }
 
 var ammo = {
+	SWORD: 1,
 	PISTOL: 100,
 	RIFLE: 0,
 	LAUNCHER: 0,
 	BOLT_LAUNCHER: 0,
 	BAT: 0,
-	SWORD: 1,
 	SAW: 0
 }

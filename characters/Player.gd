@@ -14,14 +14,14 @@ const MAX_HEALTH = 200.0
 
 var health = 200.0
 
-enum {PISTOL, RIFLE, LAUNCHER, BOLT_LAUNCHER, BAT, SWORD, SAW}
+enum {SWORD, PISTOL, RIFLE, LAUNCHER, BOLT_LAUNCHER, BAT, SAW}
 var fireRates = [
+	3,
 	3,
 	0.8,
 	8,
 	8,
 	4.5,
-	3,
 	0.5
 ]
 var prevEquipped

@@ -3,7 +3,6 @@
 [ext_resource path="res://img/tiles/Neon Tiles.png" type="Texture" id=1]
 [ext_resource path="res://shaders/floor_shadermaterial.tres" type="Material" id=2]
 
-
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 32, 32, 0, 32, 0, 1, 32, 1 )
 

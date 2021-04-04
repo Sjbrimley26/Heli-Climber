@@ -2,14 +2,8 @@ extends "res://characters/enemies/Enemy.gd"
 
 var Bullet = preload("res://guns/projectiles/Bullet.gd")
 
-const GRAVITY = 30
 const JUMP = -900
 const BITE_DAMAGE = 10
-
-enum {STATE_IDLE, STATE_CHASING, STATE_ATTACKING}
-
-var current_state = STATE_IDLE
-var velocity = Vector2()
 
 func is_between (toTest, min_val, max_val):
 	if toTest >= min_val and toTest <= max_val:
@@ -21,6 +15,7 @@ func _init():
 	ACCELERATION = 10
 	MAX_HEALTH = 30.0
 	set_meta("enemy", "runner")
+	affected_by_gravity = true
 	
 var _is_biting = false
 
@@ -64,12 +59,6 @@ func die():
 	
 func _physics_process(_delta):
 	match current_state:
-		STATE_IDLE:
-			# currently just sits until a target approaches
-			if target != null:
-				current_state = STATE_CHASING
-			velocity.y = velocity.y + GRAVITY # fall
-			velocity = move_and_slide(velocity, Vector2.UP)
 		
 		STATE_CHASING:
 			var curr_speed = velocity.x

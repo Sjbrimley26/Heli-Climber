@@ -8,6 +8,14 @@ export(int) var ACCELERATION
 
 var target
 var rng = RandomNumberGenerator.new()
+var velocity = Vector2()
+
+enum {STATE_IDLE, STATE_CHASING, STATE_ATTACKING}
+
+var current_state = STATE_IDLE
+
+var affected_by_gravity = false
+const GRAVITY = 30
 
 signal hp_changed(x)
 
@@ -68,3 +76,13 @@ func on_collision(body):
 
 func on_animation_end(_name):
 	pass        
+	
+func _physics_process(_delta):
+	match current_state:
+		STATE_IDLE:
+			# currently just sits until a target approaches
+			if target != null:
+				current_state = STATE_CHASING
+			if affected_by_gravity:
+				velocity.y = velocity.y + GRAVITY # fall
+				velocity = move_and_slide(velocity, Vector2.UP)
