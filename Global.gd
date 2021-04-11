@@ -31,15 +31,19 @@ var floor_reached = 0
 
 var enemies_killed = {
 	"runner": 0,
-	"drone": 0
+	"drone": 0,
+	"hoverbot": 0,
+	"turret": 0
 }
 
 var ammo = {
 	SWORD: 1,
-	PISTOL: 100,
+	PISTOL: 999,
 	RIFLE: 0,
 	LAUNCHER: 0,
 	BOLT_LAUNCHER: 0,
 	BAT: 0,
 	SAW: 0
 }
+
+var death_reason := ""

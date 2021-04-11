@@ -1,0 +1,40 @@
+shader_type canvas_item;
+
+uniform sampler2D emission;
+uniform vec4 glow1: hint_color;
+uniform vec4 glow2: hint_color;
+uniform vec4 glow3: hint_color;
+uniform float strength = 0.3;
+
+void fragment() {
+	vec4 current_color = texture(TEXTURE, UV);
+	vec4 emission_color = texture(emission, UV);
+	if (emission_color.r <= 1f && emission_color.r > 0.8) {
+		if (current_color.a > 0f) {
+			COLOR = current_color + glow1 * strength
+		} else {
+			COLOR = current_color
+		}
+		
+	} 
+	else if (emission_color.r <= 0.8 && emission_color.r > 0.6) {
+		if (current_color.a > 0f) {
+			COLOR = current_color + glow2 * strength
+		} else {
+			COLOR = current_color
+		}
+	}
+	else if (emission_color.r <= 0.6 && emission_color.r > 0.4) {
+		if (current_color.a > 0f) {
+			COLOR = current_color + glow3 * strength
+		} else {
+			COLOR = current_color
+		}
+	}
+	else if (emission_color.r > 0f && emission_color.r <= 0.4) {
+		COLOR = current_color; // don't change this
+	}
+	else {
+		COLOR = current_color
+	}
+}

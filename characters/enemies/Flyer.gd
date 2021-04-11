@@ -2,13 +2,17 @@ extends "res://characters/enemies/Enemy.gd"
 
 # requires a NeighborArea = a 2d with its mask set to enemies
 
-export var FIRE_RATE = 7
+export var FIRE_RATE = 3.5
 export var FIRE_RANGE = 300
 export var SIGHT_RANGE = 100
-export var MAX_AVOID_FORCE = 6
-export var SEP_FORCE = 6
+var MAX_AVOID_FORCE
+var SEP_FORCE
 
 var reloading = 0
+
+func _ready():
+	MAX_AVOID_FORCE = ACCELERATION / 2.0
+	SEP_FORCE = ACCELERATION
 
 func _physics_process(_delta):
 	if reloading > 0:

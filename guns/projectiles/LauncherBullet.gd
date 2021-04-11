@@ -2,7 +2,10 @@ extends "res://guns/projectiles/Bullet.gd"
 
 var explosion_sound = preload("res://sounds/explosion_1.wav")
 
-signal trigger_aoe()
+signal trigger_aoe
+
+func _ready():
+	$AOE.set_origin("launcher")
 
 func _init():
 	speed = 400

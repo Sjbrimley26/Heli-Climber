@@ -15,6 +15,15 @@ const MAX_HEALTH = 200.0
 var health = 200.0
 
 enum {SWORD, PISTOL, RIFLE, LAUNCHER, BOLT_LAUNCHER, BAT, SAW}
+var gun_names = {
+	SWORD: "SWORD",
+	PISTOL: "PISTOL",
+	RIFLE: "RIFLE",
+	LAUNCHER: "ROCKET",
+	BOLT_LAUNCHER: "BOLT GUN",
+	BAT: "BAT",
+	SAW: "SAW"
+}
 var fireRates = [
 	3,
 	3,
@@ -25,7 +34,7 @@ var fireRates = [
 	0.5
 ]
 var prevEquipped
-var equipped #= PISTOL
+var equipped = PISTOL
 var reloading = 0
 var camera_shaking = false
 var recent_damage = 1
@@ -66,6 +75,8 @@ func on_collision(area):
 	health -= area.damage
 	emit_signal("hp_changed", health)
 	if health <= 0:
+		if area.has_meta("origin"):
+			Global.death_reason = area.get_meta("origin")
 		var _err3 = get_tree().change_scene_to(death_menu)
 	
 func stop_camera_shake(timer):
@@ -78,12 +89,9 @@ func _ready():
 	set_meta("type", "player")
 	var _err = connect("hp_changed", $CanvasLayer/GUI, "adjust_health")
 
-func _enter_tree():
-	equipped = PISTOL
-
 func _next_weapon():
 	var toEquip
-	for i in range(1, fireRates.size() - 1):
+	for i in range(1, fireRates.size()):
 		var index: int
 		if equipped + i < fireRates.size():
 			index = equipped + i
@@ -123,7 +131,7 @@ func _physics_process(_delta):
 	
 	if Input.is_action_just_pressed("weapon_prev"):
 		var toEquip
-		for i in range(-1, -fireRates.size() + 1, -1):
+		for i in range(-1, -fireRates.size(), -1):
 			var index: int
 			if equipped + i >= 0:
 				index = equipped + i
@@ -171,9 +179,10 @@ func _physics_process(_delta):
 			get_node("Gun").free()
 		prevEquipped = equipped
 		add_child(newlyEquipped)
-		$CanvasLayer/GUI.get_node("HBoxContainer/CenterContainer/GunIcon").texture = icon
+		$CanvasLayer/GUI.get_node("VBoxContainer/HBoxContainer/CenterContainer/GunIcon").texture = icon
 	
-	$CanvasLayer/GUI/HBoxContainer/CenterContainer2/AmmoCount.text = String(Global.ammo[equipped])
+	$CanvasLayer/GUI/VBoxContainer/HBoxContainer/CenterContainer2/AmmoCount.text = String(Global.ammo[equipped])
+	$CanvasLayer/GUI/VBoxContainer/HBoxContainer/CenterContainer3/Equipped.text = gun_names[equipped]
 	
 	var localMouse = get_local_mouse_position()
 	var globalMouse = get_global_mouse_position()

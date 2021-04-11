@@ -34,6 +34,7 @@ func bite():
 func trigger_bite_damage(timer):
 	var chomp = Bullet.new()
 	chomp.set_damage(BITE_DAMAGE)
+	chomp.set_meta("origin", "runner")
 	for enemy in $Bite.get_overlapping_bodies():
 		if enemy.has_method("on_collision"):
 			enemy.on_collision(chomp)
@@ -55,6 +56,7 @@ func on_animation_end(name):
 		
 func die():
 	$Bite/Sprite.visible = false
+	$Light2D.queue_free()
 	.die()
 	
 func _physics_process(_delta):

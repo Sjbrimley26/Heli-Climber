@@ -58,7 +58,7 @@ func die():
 		var hpack = load("res://props/HealthPack.tscn").instance()
 		hpack.global_position = global_position
 		get_parent().get_parent().call_deferred("add_child", hpack)
-	if d10 > 2.0 and d10 <= 7.0:
+	if d10 > 2.0 and d10 <= 5.0:
 		var ammo = load("res://props/Ammo.tscn").instance()
 		ammo.global_position = global_position
 		get_parent().get_parent().call_deferred("add_child", ammo)
@@ -76,6 +76,14 @@ func on_collision(body):
 
 func on_animation_end(_name):
 	pass        
+	
+func _is_target_in_sight():
+	var in_sight = false
+	if target:
+		var space_state = get_world_2d().direct_space_state
+		var raycast = space_state.intersect_ray(global_position, target.global_position, [self])
+		in_sight = raycast.has("collider") and raycast["collider"] == target
+	return in_sight
 	
 func _physics_process(_delta):
 	match current_state:

@@ -73,7 +73,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=13]
-radius = 100.0
+radius = 35.0
 
 [node name="Heli_Drone" type="KinematicBody2D"]
 collision_layer = 4
@@ -86,7 +86,7 @@ shape = SubResource( 1 )
 
 [node name="head" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="arm_l" type="Sprite" parent="head"]
@@ -108,6 +108,8 @@ position = Vector2( -2.37841, 6.09468 )
 
 [node name="Detection" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
 shape = SubResource( 3 )

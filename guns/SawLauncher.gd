@@ -4,6 +4,8 @@ var saw = preload("res://guns/projectiles/MeleeSaw.tscn")
 var bullet = preload("res://guns/projectiles/SawBlade.tscn")
 var sound = preload("res://sounds/saw_running.wav")
 
+const SAW_RELOAD_TIME := 2.0
+
 # TODO: BUG FIX
 # when the player shoots a saw towards the ground at about a 45 degree angle the blade can get stuck there
 
@@ -63,7 +65,7 @@ func fire(dir):
 	has_saw = false
 	$Muzzle/Saw.queue_free()
 	var timer = Timer.new()
-	timer.set_wait_time(3)
+	timer.set_wait_time(SAW_RELOAD_TIME)
 	var _err = timer.connect("timeout", self, "_reload", [timer])
 	add_child(timer)
 	timer.start()

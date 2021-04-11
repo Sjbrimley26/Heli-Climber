@@ -11,10 +11,10 @@ script = ExtResource( 3 )
 [node name="Level1" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 82.0247, 202.285 )
+position = Vector2( -105.975, 198.285 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.25098, 0.25098, 0.25098, 1 )
 
 [node name="Node2D" parent="." instance=ExtResource( 5 )]
-position = Vector2( 359.918, 127.28 )
+position = Vector2( 265.165, 193.041 )

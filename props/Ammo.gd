@@ -1,11 +1,13 @@
 extends Node2D
 
+enum {SWORD, PISTOL, RIFLE, LAUNCHER, BOLT_LAUNCHER, BAT, SAW}
+
 const AMMO_TYPES = [
-	Global.RIFLE,
-	Global.LAUNCHER,
-	Global.BOLT_LAUNCHER,
-	Global.BAT,
-	Global.SAW
+	RIFLE,
+	LAUNCHER,
+	BOLT_LAUNCHER,
+	BAT,
+	SAW
 ]
 
 const CHANCES = [
@@ -36,15 +38,15 @@ func _ready():
 func _give_ammo(_body: Player, weapon: int):
 	var amount: int
 	match weapon:
-		Global.RIFLE:
+		RIFLE:
 			amount = 30
-		Global.LAUNCHER:
+		LAUNCHER:
 			amount = 10
-		Global.BOLT_LAUNCHER:
+		BOLT_LAUNCHER:
 			amount = 8
-		Global.BAT:
+		BAT:
 			amount = 15
-		Global.SAW:
+		SAW:
 			amount = 10
 	Global.ammo[weapon] += amount
 	queue_free()

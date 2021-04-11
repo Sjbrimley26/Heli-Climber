@@ -1,0 +1,146 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://characters/components/HealthBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/enemies/Hover_Drone.gd" type="Script" id=2]
+[ext_resource path="res://img/enemies/hover_drone/hover_drone.png" type="Texture" id=3]
+[ext_resource path="res://img/enemies/hover_drone/explosion.png" type="Texture" id=4]
+[ext_resource path="res://img/lights/circle.png" type="Texture" id=5]
+[ext_resource path="res://characters/enemies/projectiles/Heli_Bullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sounds/pistol.wav" type="AudioStream" id=7]
+[ext_resource path="res://img/enemies/hover_drone/explosion_emission.png" type="Texture" id=8]
+[ext_resource path="res://shaders/hover_detonation.shader" type="Shader" id=9]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 15, 5.75 )
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 341.273
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 20.0
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 9 )
+shader_param/glow1 = Color( 1, 0.968627, 0.972549, 1 )
+shader_param/glow2 = Color( 0.286275, 0.905882, 0.92549, 1 )
+shader_param/glow3 = Color( 0.2, 0.407843, 0.862745, 1 )
+shader_param/glow4 = Color( 1, 0.854902, 0.270588, 1 )
+shader_param/strength = 0.3
+shader_param/emission = ExtResource( 8 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[node name="HoverDrone" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource( 2 )
+Bullet = ExtResource( 6 )
+sound = ExtResource( 7 )
+
+[node name="body" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -1.5 )
+shape = SubResource( 5 )
+
+[node name="Detection" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+shape = SubResource( 6 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -15.2028 )
+scale = Vector2( 0.450751, 0.450751 )
+
+[node name="NeighborArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2147483655
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NeighborArea"]
+scale = Vector2( 2.21413, 2.21413 )
+shape = SubResource( 7 )
+
+[node name="Detonation" type="AnimatedSprite" parent="."]
+visible = false
+material = SubResource( 8 )
+frames = SubResource( 17 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+texture_scale = 0.1
+color = Color( 1, 0.235294, 0, 1 )

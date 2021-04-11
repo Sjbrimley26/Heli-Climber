@@ -53,9 +53,6 @@ collision_mask = 4
 position = Vector2( 366.637, 49.1369 )
 shape = SubResource( 1 )
 
-[node name="Barrel" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170.283, 208.841 )
-
 [node name="Barrel2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 656.962, 209.299 )
 

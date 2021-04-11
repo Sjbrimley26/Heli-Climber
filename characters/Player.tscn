@@ -62,7 +62,6 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "idle"
-frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -87,5 +86,5 @@ editor_draw_drag_margin = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource( 3 )]
-margin_top = -92.895
-margin_bottom = 23.105
+margin_top = -197.547
+margin_bottom = 18.4531

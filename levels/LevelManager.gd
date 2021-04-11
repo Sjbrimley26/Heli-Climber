@@ -3,11 +3,16 @@ extends Node2D
 const MAX_HEIGHT = 1000000
 
 const LEVELS = [
-	"res://levels/Level2.tscn"
+	#"res://levels/Level2.tscn",
+	#"res://levels/Level3.tscn",
+	#"res://levels/Level4.tscn",
+	"res://levels/Level5.tscn"
 ]
 
-var thread = Thread.new()
-var mutex = Mutex.new()
+const CAN_USE_THREADS = false
+
+var thread
+var mutex
 var rng = RandomNumberGenerator.new()
 
 var prev_level: Level
@@ -24,6 +29,9 @@ func _ready():
 	var _err = timer.connect("timeout", Global, "update_floor_color")
 	add_child(timer)
 	timer.start()
+	if CAN_USE_THREADS:
+		thread = Thread.new()
+		mutex = Mutex.new()
 	
 func _spawn_thread(h):
 	thread.start(self, "_spawn_new_level", h)
@@ -44,6 +52,15 @@ func _spawn_new_level(height):
 	# big thank you to Yogoda (on Github)
 	# 0.0 usually works but sometimes causes errors, 0.2 is safer
 	thread.call_deferred("wait_to_finish")
+	
+func _spawn_new_level_threadless(height):
+	var new_level = load(LEVELS[rng.randi_range(0, LEVELS.size() - 1)]).instance()
+	new_level.set_deferred("position", Vector2(0, new_level.position.y - (height + current_height)))
+	current_height += height
+	var _err = new_level.connect("trigger_current_level", self, "_change_current_level", [], CONNECT_ONESHOT)
+	#call_deferred("add_child", new_level) - this causes a bunch of errors
+	var _err2 = get_tree().create_timer(0.2).connect("timeout", self, "add_child", [new_level])
+	
 	
 func _change_current_level(level: Level):
 	floor_reached += 1
@@ -67,7 +84,13 @@ func _change_current_level(level: Level):
 		prev_level.enemies_sent = []
 		# if they fall further than that, they should die (there will be nothing below)
 	current_level = level
-	var _err = current_level.connect("trigger_next_level", self, "_spawn_thread", [], CONNECT_ONESHOT)
+	var new_level_func
+	if CAN_USE_THREADS:
+		new_level_func = "_spawn_thread"
+	else:
+		new_level_func = "_spawn_new_level_threadless"
+		
+	var _err = current_level.connect("trigger_next_level", self, new_level_func, [], CONNECT_ONESHOT)
 	# as they enter a new area, it becomes the current room and the one they just left becomes the previous room
 	var _err3 = current_level.connect("enemy_change_level", self, "_enemy_change_level")
 	# the camera is restricted so it doesn't go left or right over the current level
@@ -78,6 +101,7 @@ func _change_current_level(level: Level):
 	$Player/Camera2D.limit_right = map_limits.end.x * map_cell_size.x
 
 func _kill_player(_player):
+	Global.death_reason = "fall"
 	var _err = get_tree().change_scene("res://menus/DeathMenu.tscn")
 	
 func _kill_enemy(enemy: Enemy):

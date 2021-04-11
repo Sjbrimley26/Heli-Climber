@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 glow1: hint_color;
+uniform vec4 glow2: hint_color;
+uniform vec4 glow3: hint_color;
+
+uniform float strength = 1.5;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	float r = color.r;
+	if (r <= 1f  && r > 0.8) {
+		COLOR = glow1 * strength
+	} 
+	else if (r <= 0.8 && r > 0.6) {
+		COLOR = glow2 * strength
+	}
+	else if (r <= 0.6 && r > 0.4) {
+		COLOR = glow3  * strength
+	}
+	else {
+		COLOR = color
+	}
+	
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/glow1 = Color( 1, 0.968627, 0.972549, 1 )
+shader_param/glow2 = Color( 1, 0.854902, 0.270588, 1 )
+shader_param/glow3 = Color( 1, 0.509804, 0.270588, 1 )
+shader_param/strength = 1.0
