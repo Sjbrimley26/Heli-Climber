@@ -21,7 +21,7 @@ func fire(dir):
 	var timer = Timer.new()
 	timer.set_one_shot(true)
 	timer.connect("timeout", self, "_swing", [timer], CONNECT_ONESHOT)
-	timer.set_wait_time(0.3)
+	timer.set_wait_time(0.25)
 	add_child(timer)
 	timer.start()
 

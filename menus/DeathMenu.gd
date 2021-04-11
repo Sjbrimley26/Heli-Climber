@@ -31,7 +31,7 @@ func _ready():
 func _new_game():
 	for i in Global.ammo.keys():
 		Global.ammo[i] = 0
-	Global.ammo[Global.PISTOL] = 100
+	Global.ammo[Global.PISTOL] = 999
 	Global.ammo[Global.SWORD] = 1
 	for i in Global.enemies_killed.keys():
 		Global.enemies_killed[i] = 0

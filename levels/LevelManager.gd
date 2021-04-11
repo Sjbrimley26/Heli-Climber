@@ -3,13 +3,13 @@ extends Node2D
 const MAX_HEIGHT = 1000000
 
 const LEVELS = [
-	#"res://levels/Level2.tscn",
-	#"res://levels/Level3.tscn",
-	#"res://levels/Level4.tscn",
+	"res://levels/Level2.tscn",
+	"res://levels/Level3.tscn",
+	"res://levels/Level4.tscn",
 	"res://levels/Level5.tscn"
 ]
 
-const CAN_USE_THREADS = false
+const CAN_USE_THREADS = true
 
 var thread
 var mutex

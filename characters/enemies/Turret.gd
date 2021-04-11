@@ -4,6 +4,7 @@ export var Bullet: PackedScene
 export var sound: AudioStream
 export var FIRE_RATE := 1.0
 var reloading = 0
+var rot
 
 func _init():
 	MAX_HEALTH = 15.0
@@ -11,6 +12,7 @@ func _init():
 	
 func _ready():
 	var _err = $Detection.connect("body_exited", self, "_lost_target")
+	rot = rotation_degrees
 	
 func _physics_process(_delta):
 	reloading -= 0.1
@@ -20,9 +22,14 @@ func _physics_process(_delta):
 		target_in_sight = _is_target_in_sight()
 		if target_in_sight:
 			var spot = target.global_position - global_position
-			$Barrel.rotation = spot.angle()
 			$Line2D.visible = true
-			$Line2D.set_point_position(1, $Barrel/Muzzle.global_position - target.global_position)
+			if abs(90 - rot) < 1 or abs(270 - rot) < 1:
+				var rads = rot * PI / 180
+				$Barrel.rotation = spot.angle() - rads + PI / 2
+				$Line2D.set_point_position(1, ($Barrel/Muzzle.global_position - target.global_position).rotated(rads))
+			else:
+				$Barrel.rotation = spot.angle() - PI/2
+				$Line2D.set_point_position(1, $Barrel/Muzzle.global_position - target.global_position)
 		else:
 			$Line2D.visible = false
 
