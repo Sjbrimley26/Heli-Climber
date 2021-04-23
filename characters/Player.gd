@@ -3,6 +3,7 @@ extends KinematicBody2D
 class_name Player
 
 signal fire(direction)
+signal ohm(direction)
 
 signal hp_changed(hp)
 
@@ -136,7 +137,7 @@ func _physics_process(_delta):
 			if equipped + i >= 0:
 				index = equipped + i
 			else:
-				index = (equipped + i) + (fireRates.size() - 1)
+				index = (equipped + i) + (fireRates.size())
 				
 			if (Global.ammo[index] > 0):
 				toEquip = index
@@ -199,6 +200,12 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("click") and reloading <= 0:
 		var dir = globalMouse - global_position
 		emit_signal("fire", dir)
+		reloading = fireRates[equipped]
+		
+	# OHM = super blast
+	if Input.is_action_pressed("r_click") and reloading <= 0 and $CanvasLayer/GUI.ohm == 100:
+		var dir = globalMouse - global_position
+		emit_signal("ohm", dir)
 		reloading = fireRates[equipped]
 		
 	# Camera follow mouse

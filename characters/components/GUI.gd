@@ -2,6 +2,7 @@ extends MarginContainer
 
 var max_health = 200.0
 var multiplier = max_health / 100
+var ohm = 100.0
 
 var currently_equipped = 1
 
@@ -10,9 +11,15 @@ var last_check := 0.0
 var tween
 
 func adjust_health(hp):
-	$VBoxContainer/HBoxContainer/HBoxContainer/CenterContainer/TextureProgress.value = hp / multiplier
+	$VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/HealthProgress.value = hp / multiplier
+
+func use_ohm():
+	ohm = 0
 
 func _process(delta):
+	if ohm < 100:
+		ohm += 0.5
+	$VBoxContainer/HBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer/OhmProgress.value = ohm
 	last_check += delta
 	if last_check < 0.2:
 		return

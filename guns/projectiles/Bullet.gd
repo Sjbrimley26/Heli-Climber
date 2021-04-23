@@ -10,7 +10,7 @@ var affected_by_gravity = false
 func set_damage(x):
 	damage = x
 
-func on_collide():
+func on_collide(_body):
 	queue_free()
 
 func start_at(dir, pos):
@@ -37,4 +37,4 @@ func _physics_process(delta):
 		if hit.has_method("on_collision"):
 			hit.on_collision(self)
 		# just delete itself
-		on_collide()
+		on_collide(hit)

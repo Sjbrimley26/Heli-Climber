@@ -6,7 +6,8 @@ const LEVELS = [
 	"res://levels/Level2.tscn",
 	"res://levels/Level3.tscn",
 	"res://levels/Level4.tscn",
-	"res://levels/Level5.tscn"
+	"res://levels/Level5.tscn",
+	"res://levels/Level6.tscn"
 ]
 
 const CAN_USE_THREADS = true

@@ -14,7 +14,8 @@ func _init():
 func _lights_out():
 	$Light2D.visible = false
 
-func on_collide():
+func on_collide(_body):
+	set_physics_process(false)
 	$Light2D.visible = true
 	var flash_duration = 0.3
 	var _err3 = get_tree().create_timer(flash_duration).connect("timeout", self, "_lights_out")

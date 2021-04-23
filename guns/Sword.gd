@@ -1,5 +1,7 @@
 extends "res://guns/Gun.gd"
 
+var bullet = preload("res://guns/projectiles/SwordSlice.tscn")
+
 signal trigger_aoe()
 
 func _start_block(dir):
@@ -24,6 +26,19 @@ func fire(dir):
 	timer.set_wait_time(0.25)
 	add_child(timer)
 	timer.start()
+	
+func shoot_ohm(dir):
+	fire(dir)
+	var timer = Timer.new()
+	timer.connect("timeout", self, "_shoot", [dir])
+	timer.connect("timeout", timer, "queue_free")
+	add_child(timer)
+	timer.start(0.25)
+
+func _shoot(dir):
+	var b = bullet.instance()
+	get_parent().get_parent().add_child(b)
+	b.start_at(dir.angle(), $Muzzle.global_position)
 
 func _swing(timer):
 	emit_signal("trigger_aoe")

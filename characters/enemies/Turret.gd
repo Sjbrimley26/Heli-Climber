@@ -13,6 +13,10 @@ func _init():
 func _ready():
 	var _err = $Detection.connect("body_exited", self, "_lost_target")
 	rot = rotation_degrees
+	#var space_state = get_world_2d().direct_space_state
+	#var raycast = space_state.intersect_ray(global_position, global_position + $Line2D.get_point_position(1), [self])
+	#if raycast.has("collider"):
+	#	$Line2D.set_point_position(1, raycast.position + position)
 	
 func _physics_process(_delta):
 	reloading -= 0.1
@@ -42,7 +46,7 @@ func _physics_process(_delta):
 			var bullet = Bullet.instance()
 			bullet.set_meta("origin", "turret")
 			get_parent().add_child(bullet)
-			var dir = target.global_position + Vector2(target.velocity.x / 2.5, 0) - self.global_position
+			var dir = target.global_position - self.global_position # + Vector2(target.velocity.x / 2.5, 0)
 			var angle = dir.angle()
 			bullet.start_at(angle, $Barrel/Muzzle.global_position)
 			# reload
@@ -70,6 +74,7 @@ func _lost_target(body):
 func die():
 	$Barrel.visible = false
 	$Base.visible = false
+	$Line2D.visible = false
 	.die()
 
 func _end_flash(timer: Timer):

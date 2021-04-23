@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://guns/projectiles/LauncherBullet.gd" type="Script" id=1]
+[ext_resource path="res://guns/projectiles/SeekerBullet.gd" type="Script" id=1]
 [ext_resource path="res://img/projectiles/launcher_bullet.png" type="Texture" id=2]
 [ext_resource path="res://img/projectiles/launcher_explosion.png" type="Texture" id=3]
 [ext_resource path="res://guns/projectiles/AOE.tscn" type="PackedScene" id=4]
@@ -109,6 +109,7 @@ rotation = 1.56964
 shape = SubResource( 16 )
 
 [node name="AOE" parent="." instance=ExtResource( 4 )]
+visible = false
 scale = Vector2( 9.00903, 9.00903 )
 collision_mask = 7
 knockback = 600
@@ -117,3 +118,10 @@ knockback = 600
 visible = false
 texture = ExtResource( 5 )
 texture_scale = 0.15
+
+[node name="Detection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Detection"]
+polygon = PoolVector2Array( 0, 0, 166, -235, 251, -150, 300, 0, 251, 150, 166, 235 )

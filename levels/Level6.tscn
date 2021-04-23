@@ -4,8 +4,8 @@
 [ext_resource path="res://levels/Floor_Tilemap.tres" type="TileSet" id=2]
 [ext_resource path="res://levels/Level.gd" type="Script" id=3]
 [ext_resource path="res://characters/enemies/Turret.tscn" type="PackedScene" id=4]
-[ext_resource path="res://characters/enemies/Hover_Drone.tscn" type="PackedScene" id=5]
-[ext_resource path="res://characters/enemies/Runner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://characters/enemies/Heli_Drone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/enemies/Hover_Drone.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 516, 16 )
@@ -17,7 +17,7 @@ script = ExtResource( 3 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -1507333, 0, 262148, -1572837, 0, 262148, -1441797, 0, 196608, -1507301, 0, 196608, -1376261, 0, 196608, -1441765, 0, 196608, -1310725, 0, 196608, -1376229, 0, 196608, -1245189, 0, 196608, -1310718, 0, 262149, -1310717, 0, 131077, -1310716, 0, 262147, -1310712, 0, 262149, -1310711, 0, 131077, -1310710, 0, 131077, -1310709, 0, 131077, -1310708, 0, 131077, -1310707, 0, 131077, -1310706, 0, 262147, -1310702, 0, 262149, -1310701, 0, 131077, -1310700, 0, 262147, -1310693, 0, 196608, -1179653, 0, 196608, -1245157, 0, 196608, -1114117, 0, 196608, -1179621, 0, 196608, -1048581, 0, 196608, -1114085, 0, 196608, -983045, 0, 196608, -1048549, 0, 196608, -917509, 0, 196608, -983013, 0, 196608, -851973, 0, 196608, -851969, 0, 262149, -917504, 0, 131077, -917503, 0, 262147, -917499, 0, 262149, -917498, 0, 131077, -917497, 0, 262147, -917489, 0, 262149, -917488, 0, 131077, -917487, 0, 262147, -917483, 0, 262149, -917482, 0, 131077, -917481, 0, 262147, -917477, 0, 196608, -786437, 0, 196608, -851941, 0, 196608, -720901, 0, 196608, -786405, 0, 196608, -655365, 0, 196608, -720869, 0, 196608, -589829, 0, 196608, -589825, 0, 262149, -655360, 0, 131077, -655359, 0, 131077, -655358, 0, 131077, -655357, 0, 131077, -655356, 0, 131077, -655355, 0, 131077, -655354, 0, 131077, -655353, 0, 131077, -655352, 0, 131077, -655351, 0, 131077, -655350, 0, 131077, -655349, 0, 131077, -655348, 0, 131077, -655347, 0, 131077, -655346, 0, 131077, -655345, 0, 131077, -655344, 0, 131077, -655343, 0, 131077, -655342, 0, 131077, -655341, 0, 131077, -655340, 0, 131077, -655339, 0, 131077, -655338, 0, 131077, -655337, 0, 262147, -655333, 0, 196608, -524293, 0, 196608, -589797, 0, 196608, -458757, 0, 196608, -524261, 0, 196608, -393221, 0, 196608, -458725, 0, 196608, -327685, 0, 196608, -393189, 0, 196608, -262149, 0, 65537, -262148, 0, 131077, -262147, 0, 131077, -262146, 0, 131077, -262145, 0, 131077, -327680, 0, 131077, -327679, 0, 131077, -327678, 0, 131077, -327677, 0, 131077, -327676, 0, 131077, -327675, 0, 131077, -327674, 0, 131077, -327673, 0, 131077, -327672, 0, 131077, -327671, 0, 262147, -327667, 0, 262149, -327666, 0, 131077, -327665, 0, 131077, -327664, 0, 131077, -327663, 0, 131077, -327662, 0, 131077, -327661, 0, 131077, -327660, 0, 131077, -327659, 0, 131077, -327658, 0, 131077, -327657, 0, 131077, -327656, 0, 131077, -327655, 0, 131077, -327654, 0, 131077, -327653, 0, 131075, -196613, 0, 196608, -262117, 0, 196608, -131077, 0, 196608, -196581, 0, 196608, -65541, 0, 196608, -131045, 0, 196608, -5, 0, 196608, -65509, 0, 196608, 65531, 0, 196613, 65532, 0, 131077, 65533, 0, 131077, 65534, 0, 262147, 2, 0, 262149, 3, 0, 131077, 4, 0, 262147, 9, 0, 262149, 10, 0, 131077, 11, 0, 131077, 12, 0, 131077, 13, 0, 262147, 18, 0, 262149, 19, 0, 131077, 20, 0, 262147, 24, 0, 262149, 25, 0, 131077, 26, 0, 131077, 27, 0, 262145 )
+tile_data = PoolIntArray( -1507333, 0, 262148, -1572837, 0, 262148, -1441797, 0, 196608, -1507301, 0, 196608, -1376261, 0, 196608, -1441765, 0, 196608, -1310725, 0, 196608, -1376244, 0, 262149, -1376243, 0, 262147, -1376229, 0, 196608, -1245189, 0, 196608, -1310718, 0, 262149, -1310717, 0, 262147, -1310693, 0, 196608, -1179653, 0, 196608, -1245157, 0, 196608, -1114117, 0, 196608, -1179638, 0, 262149, -1179637, 0, 262147, -1179621, 0, 196608, -1048581, 0, 196608, -1114085, 0, 196608, -983045, 0, 196608, -1048549, 0, 196608, -917509, 0, 196608, -983032, 0, 262149, -983031, 0, 262147, -983013, 0, 196608, -851973, 0, 196608, -917488, 0, 262148, -917477, 0, 196608, -786437, 0, 196608, -851952, 0, 327680, -851941, 0, 196608, -720901, 0, 196608, -786426, 0, 262149, -786425, 0, 262147, -786405, 0, 196608, -655365, 0, 196608, -720869, 0, 196608, -589829, 0, 196608, -655333, 0, 196608, -524293, 0, 196608, -589797, 0, 196608, -458757, 0, 196608, -524284, 0, 262149, -524283, 0, 262147, -524261, 0, 196608, -393221, 0, 196608, -458725, 0, 196608, -327685, 0, 196608, -393210, 0, 262149, -393209, 0, 262147, -393189, 0, 196608, -262149, 0, 196608, -327653, 0, 196608, -196613, 0, 196608, -262117, 0, 196608, -131077, 0, 196608, -196600, 0, 262149, -196599, 0, 262147, -196581, 0, 196608, -65541, 0, 196608, -131045, 0, 196608, -5, 0, 196608, -65509, 0, 196608, 65531, 0, 196613, 65532, 0, 131077, 65533, 0, 131077, 65534, 0, 262147, 10, 0, 262149, 11, 0, 131077, 12, 0, 262147, 24, 0, 262149, 25, 0, 131077, 26, 0, 131077, 27, 0, 262145 )
 
 [node name="Background" type="TileMap" parent="."]
 z_index = -10
@@ -53,39 +53,51 @@ position = Vector2( 369.999, -274.132 )
 shape = SubResource( 1 )
 
 [node name="Turret" parent="." instance=ExtResource( 4 )]
-position = Vector2( -110, -224 )
+position = Vector2( -111.029, -271.373 )
 rotation = 1.5708
 
 [node name="Turret2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 846, -224 )
+position = Vector2( 287.716, -428.929 )
+rotation = 3.14159
+
+[node name="Turret4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 95.7158, -584.929 )
+rotation = 3.14159
+
+[node name="Turret3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 846.444, -34.2426 )
 rotation = 4.71239
 
-[node name="Runner" parent="." instance=ExtResource( 6 )]
-position = Vector2( 82, -340 )
+[node name="Turret5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 494.444, -412.243 )
+rotation = 4.71239
 
-[node name="Runner2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 652, -344 )
+[node name="Heli_Drone" parent="." instance=ExtResource( 5 )]
+position = Vector2( 604, -220 )
 
-[node name="HoverDrone" parent="." instance=ExtResource( 5 )]
-position = Vector2( 306, -36 )
+[node name="Heli_Drone2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 610, -618 )
 
-[node name="HoverDrone2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 370, -98 )
+[node name="Heli_Drone3" parent="." instance=ExtResource( 5 )]
+position = Vector2( -18, -442 )
 
-[node name="HoverDrone3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 434, -40 )
+[node name="HoverDrone" parent="." instance=ExtResource( 6 )]
+position = Vector2( 44, -84 )
 
-[node name="HoverDrone4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 718, -198 )
+[node name="HoverDrone2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 88, -36 )
 
-[node name="HoverDrone5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 16, -206 )
+[node name="HoverDrone3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 132, -86 )
 
-[node name="HoverDrone6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 372, -494 )
+[node name="HoverDrone4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 514, -78 )
 
-[node name="HoverDrone7" parent="." instance=ExtResource( 5 )]
-position = Vector2( 334, -428 )
+[node name="HoverDrone5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 688, -74 )
 
-[node name="HoverDrone8" parent="." instance=ExtResource( 5 )]
-position = Vector2( 414, -426 )
+[node name="HoverDrone6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 488, -526 )
+
+[node name="HoverDrone7" parent="." instance=ExtResource( 6 )]
+position = Vector2( 222, -562 )

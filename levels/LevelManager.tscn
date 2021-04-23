@@ -18,3 +18,4 @@ color = Color( 0.25098, 0.25098, 0.25098, 1 )
 
 [node name="Node2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 265.165, 193.041 )
+type = 4

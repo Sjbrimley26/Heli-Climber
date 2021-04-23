@@ -96,7 +96,7 @@ texture = ExtResource( 2 )
 material = SubResource( 2 )
 position = Vector2( 1.06067, 10 )
 z_index = -1
-points = PoolVector2Array( -0.96042, 0.718781, -0.355286, -478.27 )
+points = PoolVector2Array( -0.96042, 0.718781, -0.355, -400 )
 width = 2.0
 default_color = Color( 0.705882, 0.215686, 0.376471, 1 )
 
@@ -135,7 +135,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Detection"]
-polygon = PoolVector2Array( -0.325562, 20.4601, -407, -473, 404, -466 )
+polygon = PoolVector2Array( 0, 14, -400, 14, -380, -110.9, -300, -250, -165, -350, 0, -386, 165, -350, 300, -250, 380, -110, 400, 14 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 7 )]
 position = Vector2( 0, 30 )

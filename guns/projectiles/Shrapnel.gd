@@ -1,10 +1,6 @@
 extends "res://guns/projectiles/Bullet.gd"
-
-var sound = preload("res://sounds/explosion_2.wav")
-
-var prev_position
-
 signal trigger_aoe()
+var prev_position
 
 func _init():
 	speed = 800
@@ -14,27 +10,19 @@ func _init():
 func _ready():
 	prev_position = get_global_position()
 	$AOE.init(3)
-	
+
 func adjust_angle():
 	var curr_position = get_global_position()
 	var pnt = prev_position - curr_position
 	set_rotation(pnt.angle() + 46)
 	prev_position = curr_position
-
+	
 func on_collide(_body):
 	set_physics_process(false)
 	vel = Vector2()
+	$Sprite.visible = false
 	$CollisionShape2D.set_disabled(true)
-	$Tail.visible = false
-	$AnimatedSprite.set_speed_scale(1.5)
-	$AnimatedSprite.play("explode")
+	$AnimatedSprite.visible = true
+	$AnimatedSprite.play()
 	emit_signal("trigger_aoe")
 	var _err = $AnimatedSprite.connect("animation_finished", self, "queue_free")
-	$AnimatedSprite.translate(Vector2(0, 22)) # the explosion animation is centered whereas the baseball itself is at the bottom
-	var splayer = AudioStreamPlayer2D.new()
-	splayer.stream = sound
-	var _err2 = splayer.connect("finished", splayer, "queue_free")
-	add_child(splayer)
-	splayer.play()
-	$Light2D.visible = true
-	var _err3 = get_tree().create_timer(0.3).connect("timeout", $Light2D, "queue_free")

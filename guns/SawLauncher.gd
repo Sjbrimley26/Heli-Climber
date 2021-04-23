@@ -70,5 +70,33 @@ func fire(dir):
 	add_child(timer)
 	timer.start()
 	
+func shoot_ohm(dir):
+	if not has_saw:
+		return
+	var overlapping_floor = null
+	var all_overlaps = $Muzzle/Saw.get_overlapping_bodies()
+	for body in all_overlaps:
+		if body.has_meta("type"):
+			var type = body.get_meta("type")
+			if type == "enemy" or type == "prop":
+				continue
+			else:
+				overlapping_floor = body
+	Global.ammo[Global.SAW] -= 1
+	var bullet_instance = bullet.instance()
+	get_parent().get_parent().add_child(bullet_instance)
+	var start_location = $Muzzle.get_global_position()
+	if overlapping_floor:
+		var shift = start_location - overlapping_floor.global_position
+		start_location += shift * 1.5 # this fixed most of the issue, maybe if I increase the amount?
 	
-	
+	bullet_instance.speed = 2000
+	bullet_instance.start_at(dir.angle(), start_location)
+	bullet_instance.get_node("AnimationPlayer").play("default")
+	has_saw = false
+	$Muzzle/Saw.queue_free()
+	var timer = Timer.new()
+	timer.set_wait_time(SAW_RELOAD_TIME)
+	var _err = timer.connect("timeout", self, "_reload", [timer])
+	add_child(timer)
+	timer.start()

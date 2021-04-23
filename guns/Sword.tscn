@@ -60,7 +60,12 @@ frames = SubResource( 5 )
 anims/fire = SubResource( 6 )
 
 [node name="AOE" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 13.1102, -2.99661 )
 scale = Vector2( 3.86095, 3.86095 )
 collision_mask = 13
+damage = 10
 knockback = 100
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2( 31, -8 )

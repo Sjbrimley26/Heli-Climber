@@ -4,7 +4,7 @@ extends "res://guns/projectiles/Bullet.gd"
 func _init():
 	set_damage(3)
 
-func on_collide():
+func on_collide(_body):
 	set_physics_process(false)
 	$CollisionShape2D.set_disabled(true)
 	$AnimatedSprite.play("explode")

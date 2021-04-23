@@ -1,7 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://guns/BoltLauncher.gd" type="Script" id=1]
 [ext_resource path="res://img/player/player_5.png" type="Texture" id=2]
+[ext_resource path="res://img/projectiles/beam.png" type="Texture" id=3]
+[ext_resource path="res://shaders/wall1_glow.shader" type="Shader" id=4]
+[ext_resource path="res://img/projectiles/beam_emission.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -107,6 +110,14 @@ tracks/2/keys = {
 "values": [ 0.0, -15.0, 0.0 ]
 }
 
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 4 )
+shader_param/glow1 = Color( 1, 1, 1, 1 )
+shader_param/glow2 = Color( 0, 1, 0.929412, 1 )
+shader_param/glow3 = Color( 0.266667, 0, 1, 1 )
+shader_param/strength = 0.7
+shader_param/emission = ExtResource( 5 )
+
 [node name="Gun" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -125,5 +136,13 @@ light_mask = -2147483647
 use_parent_material = true
 position = Vector2( 0, -0.0567856 )
 enabled = true
-cast_to = Vector2( 500, 0 )
+cast_to = Vector2( 900, 0 )
 collision_mask = 5
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+material = SubResource( 14 )
+points = PoolVector2Array( 15, 9.7, 900, 9.7 )
+width = 20.0
+texture = ExtResource( 3 )
+texture_mode = 1

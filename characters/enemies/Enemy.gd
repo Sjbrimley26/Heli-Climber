@@ -60,6 +60,7 @@ func die():
 		get_parent().get_parent().call_deferred("add_child", hpack)
 	if d10 > 2.0 and d10 <= 5.0:
 		var ammo = load("res://props/Ammo.tscn").instance()
+		ammo.random = true
 		ammo.global_position = global_position
 		get_parent().get_parent().call_deferred("add_child", ammo)
 	
